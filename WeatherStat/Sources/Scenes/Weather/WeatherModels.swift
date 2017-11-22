@@ -21,5 +21,13 @@ struct WeatherResponse {
 }
 
 class WeatherViewModel {
-    
+    var models: [SectionModel]
+    init(models: [SectionModel]) {
+        self.models = models
+    }
+}
+
+struct SectionModel {
+    var header: AnyObject?
+    var items: [AnyObject]
 }

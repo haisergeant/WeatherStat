@@ -41,10 +41,9 @@ class TitleSubtitleModel {
     }
     
     init(title: String,
-         image: UIImage,
          subtitle: String,
-         style: Style,
-         padding: Padding) {
+         style: Style = Style(),
+         padding: Padding = Padding()) {
         self.title = title
         self.subtitle = subtitle
         self.style = style

@@ -24,7 +24,40 @@ class WeatherPresenter: WeatherPresenterInput {
     
     // MARK: - Presentation logic
     func present(response: WeatherResponse) {
+        var sections = [SectionModel]()
         
+        let weather = response.weather
+        var header: AnyObject? = nil
+        var items = [AnyObject]()
+        
+        // Summary and current degree
+        if let current = weather.current,
+            let summary = current.summary,
+            let temp = current.temperature {
+            items.append(TitleSubtitleModel(title: summary,
+                                            subtitle: String(format: STRING.DEGREE, temp)))
+            sections.append(SectionModel(header: nil, items: items))
+        }
+        
+        // Hour value
+        header = nil
+        items.removeAll()
+        if let hours = weather.hourStatus {
+            var models = [HourStatModel]()
+            hours.forEach { status in
+                if let date = status.time {
+                    let calendar = Calendar.current
+                    let hour = calendar.component(.hour, from: date)
+                    let temp = String(format: )
+                    models.append(HourStatModel(title: "\(hour)", image: <#T##UIImage#>, subtitle: <#T##String#>))
+                }
+                
+                
+            }
+        }
+        
+        
+        self.output.display(viewModel: WeatherViewModel(models: sections))
     }
     
     func presentError(error: String) {

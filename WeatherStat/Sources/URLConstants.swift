@@ -13,3 +13,7 @@ struct URL {
     static let FORECAST_URL = "https://api.darksky.net/forecast/%@/%.4f,%.4f"
     
 }
+
+struct STRING {
+    static let DEGREE = "%.fº"
+}

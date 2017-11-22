@@ -48,8 +48,8 @@ class HourStatModel {
     init(title: String,
          image: UIImage,
          subtitle: String,
-         style: Style,
-         padding: Padding) {
+         style: Style = Style(),
+         padding: Padding = Padding()) {
         self.title = title
         self.image = image
         self.subtitle = subtitle
@@ -104,5 +104,81 @@ class HourStatView: BaseView {
         self.imageView.easy.layout(Size(model.style.imageSize))
         self.padding = model.padding
         self.configureLayout()
+    }
+}
+
+class HourListView: BaseView {
+    let scrollView = UIScrollView()
+    let container = UIView()
+    
+    override func configureSubviews() {
+        super.configureSubviews()
+        self.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.container)
+    }
+    
+    override func configureLayout() {
+        super.configureLayout()
+        self.scrollView.easy.layout(
+            Edges()
+        )
+        
+        self.container.easy.layout(
+            Top(),
+            Bottom(),
+            Left(),
+            Right(),
+            Height(80.0)
+        )
+    }
+    
+    func configure(models: [HourStatModel]) {
+        self.container.subviews.forEach { $0.removeFromSuperview() }
+        
+        var prev: HourStatView? = nil
+        models.forEach { model in
+            let view = HourStatView()
+            view.configure(model: model)
+            self.addSubview(view)
+            if let prev = prev {
+                view.easy.layout(
+                    Top(),
+                    Bottom(),
+                    Left().to(prev, .right)
+                )
+            } else {
+                view.easy.layout(
+                    Top(),
+                    Bottom(),
+                    Left()
+                )
+            }
+            prev = view
+        }
+        
+        if let prev = prev {
+            prev.easy.layout(Right())
+        }
+    }
+}
+
+class HourListViewCell: BaseTableViewCell {
+    let listView = HourListView()
+    init() {
+        super.init(identifier: "HourListViewCell")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func configureSubviews() {
+        super.configureSubviews()
+        self.contentView.addSubview(self.listView)
+    }
+    
+    override func configureLayout() {
+        super.configureLayout()
+        self.listView.easy.layout(Edges())
     }
 }
