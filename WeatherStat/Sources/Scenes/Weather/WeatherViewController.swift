@@ -12,9 +12,11 @@
 import UIKit
 
 protocol WeatherViewControllerInput {
+    func display(viewModel: WeatherViewModel)
 }
 
 protocol WeatherViewControllerOutput {
+    func load(request: WeatherRequest)
 }
 
 class WeatherViewController: BaseViewController, WeatherViewControllerInput {
@@ -22,4 +24,17 @@ class WeatherViewController: BaseViewController, WeatherViewControllerInput {
     var router: WeatherRouter!
     
     // MARK: - Object lifecycle
+    override func configureSubviews() {
+        super.configureSubviews()
+    }
+    
+    override func configureLayout() {
+        super.configureLayout()
+    }
+    
+    
+    
+    func display(viewModel: WeatherViewModel) {
+        
+    }
 }

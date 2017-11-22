@@ -11,16 +11,23 @@
 
 import UIKit
 
-protocol WeatherPresenterInput {
-    
+protocol WeatherPresenterInput: ErrorPresenterInput {
+    func present(response: WeatherResponse)
 }
 
-protocol WeatherPresenterOutput: class {
-    
+protocol WeatherPresenterOutput: class, ErrorPresenterOutput {
+    func display(viewModel: WeatherViewModel)
 }
 
 class WeatherPresenter: WeatherPresenterInput {
     weak var output: WeatherPresenterOutput!
     
     // MARK: - Presentation logic
+    func present(response: WeatherResponse) {
+        
+    }
+    
+    func presentError(error: String) {
+        self.output.displayError(error: error)
+    }
 }

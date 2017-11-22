@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import UIKit
 import ReactiveCocoa
 import ReactiveSwift
 import Alamofire
 
 class ServerRepository: Repository {
     static let instance = ServerRepository()
-    func weatherForecast(latitude: Double, longitude: Double) -> SignalProducer<Weather, NSError> {
+    func weatherForecast(latitude: CGFloat, longitude: CGFloat) -> SignalProducer<Weather, NSError> {
         return SignalProducer { observer, disposable in
             let url = String(format: URL.FORECAST_URL, URL.DARK_SKY_KEY, latitude, longitude)
             let request = Alamofire.request(url).responseJSON { response in

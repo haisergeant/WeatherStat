@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import UIKit
 import ReactiveCocoa
 import ReactiveSwift
 
 protocol Repository {
-    func weatherForecast(latitude: Double, longitude: Double) -> SignalProducer<Weather, NSError>
+    func weatherForecast(latitude: CGFloat, longitude: CGFloat) -> SignalProducer<Weather, NSError>
 }

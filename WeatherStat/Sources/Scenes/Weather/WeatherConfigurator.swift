@@ -23,7 +23,7 @@ extension WeatherPresenter: WeatherInteractorOutput {
 
 class WeatherConfigurator {
     // MARK: - Configuration
-    func getController() -> WeatherViewController {
+    class func getController() -> WeatherViewController {
         let viewController = WeatherViewController()
         let router = WeatherRouter()
         router.viewController = viewController
@@ -33,6 +33,7 @@ class WeatherConfigurator {
         
         let interactor = WeatherInteractor()
         interactor.output = presenter
+        interactor.repository = ServerRepository.instance
         
         viewController.output = interactor
         viewController.router = router

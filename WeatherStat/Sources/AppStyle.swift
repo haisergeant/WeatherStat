@@ -40,12 +40,21 @@ class AppStyle {
         FontUtils.registerFontWithFilenameString(filenameString: "OpenSans-Bold")
     }
     
+    // Font
     func fontBodyCopyRegular() -> UIFont {
         return UIFont(name: "OpenSans", size: 14.0)!
     }
     
     func fontBodyCopySmallRegular() -> UIFont {
         return UIFont(name: "OpenSans", size: 12.0)!
+    }
+    
+    func fontBodyCopyLargeRegular() -> UIFont {
+        return UIFont(name: "OpenSans", size: 16.0)!
+    }
+    
+    func fontBodyCopyXLargeRegular() -> UIFont {
+        return UIFont(name: "OpenSans", size: 20.0)!
     }
     
     func fontBodyCopySemibold() -> UIFont {
@@ -56,6 +65,10 @@ class AppStyle {
         return UIFont(name: "OpenSans-Semibold", size: 12.0)!
     }
     
+    func fontBodyCopyLargeSemibold() -> UIFont {
+        return UIFont(name: "OpenSans-Semibold", size: 16.0)!
+    }
+    
     func fontBodyCopyLight() -> UIFont {
         return UIFont(name: "OpenSans-Light", size: 14.0)!
     }
@@ -64,6 +77,20 @@ class AppStyle {
         return UIFont(name: "OpenSans-Light", size: 12.0)!
     }
     
+    func fontBodyCopyLargeLight() -> UIFont {
+        return UIFont(name: "OpenSans-Light", size: 16.0)!
+    }
+    
+    // Size
+    func sizeImageLarge() -> CGSize {
+        return CGSize(square: 20)
+    }
+    
+    func sizeImageSmall() -> CGSize {
+        return CGSize(square: 10)
+    }
+    
+    // Padding
     func paddingX() -> CGFloat {
         return 20.0
     }
@@ -76,6 +103,8 @@ class AppStyle {
         return 30.0
     }
     
+    
+    // Color
     func colorPaleGray() -> UIColor {
         return UIColor(red: 227.0/255.0, green: 227.0/255.0, blue: 227.0/255.0, alpha: 1.0)
     }

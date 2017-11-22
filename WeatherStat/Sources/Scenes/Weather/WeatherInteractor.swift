@@ -10,16 +10,31 @@
 //
 
 import UIKit
+import ReactiveCocoa
+import ReactiveSwift
 
 protocol WeatherInteractorInput {
-    
+    func load(request: WeatherRequest)
 }
 
-protocol WeatherInteractorOutput {
-    
+protocol WeatherInteractorOutput: ErrorPresenterInput {
+    func present(response: WeatherResponse)
 }
 
 class WeatherInteractor: WeatherInteractorInput {
     var output: WeatherInteractorOutput!
+    var repository: Repository!
     // MARK: - Business logic
+    func load(request: WeatherRequest) {
+        self.repository
+            .weatherForecast(latitude: request.latitude,
+                                        longitude: request.longitude)
+            .startWithResult { [weak self] result in
+                if let value = result.value {
+                    self?.output.present(response: WeatherResponse(weather: value))
+                } else {
+                    self?.output.presentError(error: "Error when calling service")
+                }
+        }
+    }
 }

@@ -11,3 +11,15 @@
 
 import UIKit
 
+struct WeatherRequest {
+    let latitude: CGFloat
+    let longitude: CGFloat
+}
+
+struct WeatherResponse {
+    let weather: Weather
+}
+
+class WeatherViewModel {
+    
+}
