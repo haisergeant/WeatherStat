@@ -74,16 +74,19 @@ extension WeatherViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let model = self.sections[section].header as? HourListModel {
             let headerView = HourListView()
-            headerView.configure(models: model.models)
+            headerView.configure(model: model)
             return headerView
         } else {
             let view = UIView()
             view.easy.layout(
-                Height(80)
+                Height(20)
             )
-            view.backgroundColor = .clear
             return view
         }
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return 20.0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

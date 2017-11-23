@@ -39,16 +39,16 @@ class WeatherPresenter: WeatherPresenterInput {
             sections.append(SectionModel(header: nil, items: items))
         }
         
-        
         // Hour value
         header = nil
         items.removeAll()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh"
         if let hours = weather.hourStatus {
             var models = [HourStatModel]()
             hours.forEach { status in
                 if let date = status.time {
-                    let calendar = Calendar.current
-                    let hour = calendar.component(.hour, from: date)
+                    let hour = formatter.string(from: date)
                     var temp = ""
                     if let degree = status.temperature {
                         temp = String(format: STRING.DEGREE, degree)
@@ -57,13 +57,14 @@ class WeatherPresenter: WeatherPresenterInput {
                     if let item = status.icon {
                         icon = item
                     }
-                    models.append(HourStatModel(title: "\(hour)",
+                    models.append(HourStatModel(title: hour,
                         image: UIImage(named: icon),
                         subtitle: temp))
                 }
             }
             header = HourListModel(models: models)
         }
+        
         // Show data for day
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
@@ -91,8 +92,7 @@ class WeatherPresenter: WeatherPresenterInput {
                                           tempLow: low))
             }
         }
-        sections.append(SectionModel(header: header, items: items))
-        
+        sections.append(SectionModel(header: header, items: items))        
         
         self.output.display(viewModel: WeatherViewModel(models: sections))
     }

@@ -21,7 +21,7 @@ class TitleSubtitleModel {
         init(titleStyle: StringStyle = StringStyle(.font(AppStyle.instance.fontBodyCopyRegular()),
                                                    .color(AppStyle.instance.colorDarkGray()),
                                                    .alignment(.center)),
-             subtitleStyle: StringStyle = StringStyle(.font(AppStyle.instance.fontBodyCopyXLargeRegular()),
+             subtitleStyle: StringStyle = StringStyle(.font(AppStyle.instance.fontBodyCopyXXLargeLight()),
                                                       .color(AppStyle.instance.colorDarkGray()),
                                                       .alignment(.center))) {
             self.titleStyle = titleStyle

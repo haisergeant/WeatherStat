@@ -28,9 +28,11 @@ class DayStatModel {
              imageSize: CGSize = AppStyle.instance.sizeImageSmall(),
              imageColor: UIColor = AppStyle.instance.colorLightBlue(),
              tempHighStyle: StringStyle = StringStyle(.font(AppStyle.instance.fontBodyCopyRegular()),
-                                                      .color(AppStyle.instance.colorDarkGray())),
+                                                      .color(AppStyle.instance.colorDarkGray()),
+                                                      .alignment(.center)),
              tempLowStyle: StringStyle = StringStyle(.font(AppStyle.instance.fontBodyCopyRegular()),
-                                                     .color(AppStyle.instance.colorLightGray()))) {
+                                                     .color(AppStyle.instance.colorLightGray()),
+                                                     .alignment(.center))) {
             self.titleStyle = titleStyle
             self.imageSize = imageSize
             self.imageColor = imageColor
@@ -107,9 +109,8 @@ class DayStatView: BaseView {
         )
         
         self.labelTitle.easy.layout(
-            Top(self.padding.appPadding.top),
+            CenterY(),
             Right(>=self.padding.horizontalSpacing).to(self.imageView, .left),
-            Bottom(<=self.padding.appPadding.bottom),
             Left(self.padding.appPadding.left)
         )
         

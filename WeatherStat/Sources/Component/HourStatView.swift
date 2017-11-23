@@ -22,11 +22,13 @@ class HourStatModel {
         let imageColor: UIColor
         let subtitleStyle: StringStyle
         init(titleStyle: StringStyle = StringStyle(.font(AppStyle.instance.fontBodyCopySmallRegular()),
-                                                   .color(AppStyle.instance.colorDarkGray())),
+                                                   .color(AppStyle.instance.colorDarkGray()),
+                                                   .alignment(.center)),
              imageSize: CGSize = AppStyle.instance.sizeImageSmall(),
              imageColor: UIColor = AppStyle.instance.colorLightBlue(),
              subtitleStyle: StringStyle = StringStyle(.font(AppStyle.instance.fontBodyCopyRegular()),
-                                                      .color(AppStyle.instance.colorDarkGray()))) {
+                                                      .color(AppStyle.instance.colorDarkGray()),
+                                                      .alignment(.center))) {
             self.titleStyle = titleStyle
             self.imageSize = imageSize
             self.imageColor = imageColor
@@ -38,7 +40,7 @@ class HourStatModel {
     struct Padding {
         let appPadding: AppPadding
         let verticalSpace: CGFloat
-        init(appPadding: AppPadding = AppPadding(left: 3, right: 3, top: 3, bottom: 3),
+        init(appPadding: AppPadding = AppPadding(left: 10, right: 10, top: 8, bottom: 8),
              verticalSpace: CGFloat = 4) {
             self.appPadding = appPadding
             self.verticalSpace = verticalSpace
@@ -74,12 +76,16 @@ class HourStatView: BaseView {
         super.configureLayout()
         self.labelTitle.easy.layout(
             Top(self.padding.appPadding.top),
-            CenterX()
+            CenterX().with(.high),
+            Left(self.padding.appPadding.left).with(.low),
+            Right(self.padding.appPadding.right).with(.low)
         )
         
         self.imageView.easy.layout(
             Top(self.padding.verticalSpace).to(self.labelTitle),
-            CenterX()
+            CenterX().with(.high),
+            Left(self.padding.appPadding.left).with(.low),
+            Right(self.padding.appPadding.right).with(.low)
         )
         
         self.labelSubtitle.easy.layout(
@@ -88,6 +94,9 @@ class HourStatView: BaseView {
             Right(self.padding.appPadding.right),
             Bottom(self.padding.appPadding.bottom)
         )
+        self.labelTitle.setContentCompressionResistancePriority(.required, for: .vertical)
+        self.labelSubtitle.setContentCompressionResistancePriority(.required, for: .vertical)
+        self.imageView.setContentCompressionResistancePriority(.required, for: .vertical)
     }
     
     override func configureContent() {
@@ -120,12 +129,14 @@ class HourListView: BaseView {
         super.configureSubviews()
         self.addSubview(self.scrollView)
         self.scrollView.addSubview(self.container)
+        self.backgroundColor = .white
     }
     
     override func configureLayout() {
         super.configureLayout()
         self.scrollView.easy.layout(
-            Edges()
+            Edges(),
+            Height().like(self.container)
         )
         
         self.container.easy.layout(
@@ -137,7 +148,8 @@ class HourListView: BaseView {
         )
     }
     
-    func configure(models: [HourStatModel]) {
+    func configure(model: HourListModel) {
+        let models = model.models
         self.container.subviews.forEach { $0.removeFromSuperview() }
         
         var prev: HourStatView? = nil
@@ -158,7 +170,7 @@ class HourListView: BaseView {
                     Left()
                 )
             }
-            prev = view            
+            prev = view
         }
         
         if let prev = prev {
@@ -187,7 +199,7 @@ class HourListViewCell: BaseTableViewCell {
         self.listView.easy.layout(Edges())
     }
     
-    func configure(model: [HourStatModel]) {
-        self.listView.configure(models: model)
+    func configure(model: HourListModel) {
+        self.listView.configure(model: model)
     }
 }

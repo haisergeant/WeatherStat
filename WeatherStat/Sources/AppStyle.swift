@@ -57,6 +57,10 @@ class AppStyle {
         return UIFont(name: "OpenSans", size: 20.0)!
     }
     
+    func fontBodyCopyXXLargeRegular() -> UIFont {
+        return UIFont(name: "OpenSans", size: 70.0)!
+    }
+    
     func fontBodyCopySemibold() -> UIFont {
         return UIFont(name: "OpenSans-Semibold", size: 14.0)!
     }
@@ -79,6 +83,10 @@ class AppStyle {
     
     func fontBodyCopyLargeLight() -> UIFont {
         return UIFont(name: "OpenSans-Light", size: 16.0)!
+    }
+    
+    func fontBodyCopyXXLargeLight() -> UIFont {
+        return UIFont(name: "OpenSans-Light", size: 70.0)!
     }
     
     // Size
