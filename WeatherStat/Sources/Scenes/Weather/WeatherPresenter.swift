@@ -39,6 +39,7 @@ class WeatherPresenter: WeatherPresenterInput {
             sections.append(SectionModel(header: nil, items: items))
         }
         
+        
         // Hour value
         header = nil
         items.removeAll()
@@ -48,13 +49,49 @@ class WeatherPresenter: WeatherPresenterInput {
                 if let date = status.time {
                     let calendar = Calendar.current
                     let hour = calendar.component(.hour, from: date)
-                    let temp = String(format: )
-                    models.append(HourStatModel(title: "\(hour)", image: <#T##UIImage#>, subtitle: <#T##String#>))
+                    var temp = ""
+                    if let degree = status.temperature {
+                        temp = String(format: STRING.DEGREE, degree)
+                    }
+                    var icon = ""
+                    if let item = status.icon {
+                        icon = item
+                    }
+                    models.append(HourStatModel(title: "\(hour)",
+                        image: UIImage(named: icon),
+                        subtitle: temp))
                 }
-                
-                
+            }
+            header = HourListModel(models: models)
+        }
+        // Show data for day
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        if let days = weather.dayStatus {
+            days.forEach { status in
+                var title = ""
+                if let time = status.time {
+                    title = dateFormatter.string(from: time)
+                }
+                var high = ""
+                if let degree = status.temperatureHigh {
+                    high = String(format: STRING.DEGREE, degree)
+                }
+                var low = ""
+                if let degree = status.temperatureLow {
+                    low = String(format: STRING.DEGREE, degree)
+                }
+                var icon = ""
+                if let item = status.icon {
+                    icon = item
+                }
+                items.append(DayStatModel(title: title,
+                                          image: UIImage(named: icon),
+                                          tempHigh: high,
+                                          tempLow: low))
             }
         }
+        sections.append(SectionModel(header: header, items: items))
         
         
         self.output.display(viewModel: WeatherViewModel(models: sections))

@@ -55,7 +55,7 @@ class TitleSubtitleView: BaseView {
     let labelTitle = UILabel()
 
     let labelSubtitle = UILabel()
-    var padding = HourStatModel.Padding()
+    var padding = TitleSubtitleModel.Padding()
     override func configureSubviews() {
         super.configureSubviews()
         self.addSubview(self.labelTitle)
@@ -82,10 +82,37 @@ class TitleSubtitleView: BaseView {
         super.configureContent()
     }
     
-    func configure(model: HourStatModel) {
+    func configure(model: TitleSubtitleModel) {
         self.labelTitle.attributedText = model.title.styled(with: model.style.titleStyle)
         self.labelSubtitle.attributedText = model.subtitle.styled(with: model.style.subtitleStyle)
         self.padding = model.padding
         self.configureLayout()
     }
+}
+
+class TitleSubtitleViewCell: BaseTableViewCell {
+    let titleView = TitleSubtitleView()
+    init() {
+        super.init(identifier: "TitleSubtitleViewCell")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func configureSubviews() {
+        super.configureSubviews()
+        self.contentView.addSubview(self.titleView)
+    }
+    
+    override func configureLayout() {
+        super.configureLayout()
+        self.titleView.easy.layout(Edges())
+    }
+    
+    func configure(model: TitleSubtitleModel) {
+        self.titleView.configure(model: model)
+    }
+    
+    
 }

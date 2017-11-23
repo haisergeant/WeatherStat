@@ -10,6 +10,8 @@
 //
 
 import UIKit
+import EasyPeasy
+import BonMot
 
 protocol WeatherViewControllerInput {
     func display(viewModel: WeatherViewModel)
@@ -23,18 +25,96 @@ class WeatherViewController: BaseViewController, WeatherViewControllerInput {
     var output: WeatherViewControllerOutput!
     var router: WeatherRouter!
     
+    var tableView = UITableView()
+    var sections = [SectionModel]()
+    
     // MARK: - Object lifecycle
     override func configureSubviews() {
         super.configureSubviews()
+        self.view.addSubview(self.tableView)
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 140
+        self.tableView.separatorStyle = .none
+        self.tableView.allowsSelection = false
     }
     
     override func configureLayout() {
         super.configureLayout()
+        self.tableView.easy.layout(
+            Top().to(self.topLayoutGuide),
+            Left(),
+            Right(),
+            Bottom()
+        )
     }
     
+    override func configureContent() {
+        super.configureContent()
+        // Sydney: 33.8650, 151.2094
+        self.tryAgainAction()
+    }
     
+    override func tryAgainAction() {
+        self.showHUD()
+        self.output.load(request: WeatherRequest(latitude: 33.8650, longitude: 151.2094))
+    }
     
     func display(viewModel: WeatherViewModel) {
-        
+        self.hideHUD()
+        self.sections.removeAll()
+        self.sections.append(contentsOf: viewModel.models)
+        self.tableView.reloadData()
     }
 }
+
+extension WeatherViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if let model = self.sections[section].header as? HourListModel {
+            let headerView = HourListView()
+            headerView.configure(models: model.models)
+            return headerView
+        } else {
+            let view = UIView()
+            view.easy.layout(
+                Height(80)
+            )
+            view.backgroundColor = .clear
+            return view
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.sections[section].items.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let object = self.sections[indexPath.section].items[indexPath.row]
+        if let obj = object as? TitleSubtitleModel {
+            var cell = tableView.dequeueReusableCell(withIdentifier: "TitleSubtitleViewCell") as? TitleSubtitleViewCell
+            if cell == nil {
+                cell = TitleSubtitleViewCell()
+                cell?.configure(model: obj)
+                return cell!
+            }
+        } else if let obj = object as? DayStatModel {
+            var cell = tableView.dequeueReusableCell(withIdentifier: "DayStatViewCell") as? DayStatViewCell
+            if cell == nil {
+                cell = DayStatViewCell()
+                cell?.configure(model: obj)
+                return cell!
+            }
+        }
+        return UITableViewCell()
+    }
+}
+extension WeatherViewController: UITableViewDelegate {
+    
+}
+

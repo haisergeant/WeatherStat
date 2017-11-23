@@ -12,7 +12,7 @@ import EasyPeasy
 
 class HourStatModel {
     let title: String
-    let image: UIImage
+    let image: UIImage?
     let subtitle: String
     
     let style: Style
@@ -46,7 +46,7 @@ class HourStatModel {
     }
     
     init(title: String,
-         image: UIImage,
+         image: UIImage? = nil,
          subtitle: String,
          style: Style = Style(),
          padding: Padding = Padding()) {
@@ -74,14 +74,12 @@ class HourStatView: BaseView {
         super.configureLayout()
         self.labelTitle.easy.layout(
             Top(self.padding.appPadding.top),
-            Left(self.padding.appPadding.left),
-            Right(self.padding.appPadding.right)
+            CenterX()
         )
         
         self.imageView.easy.layout(
             Top(self.padding.verticalSpace).to(self.labelTitle),
-            Left(self.padding.appPadding.left),
-            Right(self.padding.appPadding.right)
+            CenterX()
         )
         
         self.labelSubtitle.easy.layout(
@@ -99,11 +97,18 @@ class HourStatView: BaseView {
     func configure(model: HourStatModel) {
         self.labelTitle.attributedText = model.title.styled(with: model.style.titleStyle)
         self.labelSubtitle.attributedText = model.subtitle.styled(with: model.style.subtitleStyle)
-        self.imageView.image = model.image.brush(withColor: model.style.imageColor)
+        self.imageView.image = model.image?.brush(withColor: model.style.imageColor)
         
         self.imageView.easy.layout(Size(model.style.imageSize))
         self.padding = model.padding
         self.configureLayout()
+    }
+}
+
+class HourListModel {
+    var models: [HourStatModel]
+    init(models: [HourStatModel]) {
+        self.models = models
     }
 }
 
@@ -139,7 +144,7 @@ class HourListView: BaseView {
         models.forEach { model in
             let view = HourStatView()
             view.configure(model: model)
-            self.addSubview(view)
+            self.container.addSubview(view)
             if let prev = prev {
                 view.easy.layout(
                     Top(),
@@ -153,7 +158,7 @@ class HourListView: BaseView {
                     Left()
                 )
             }
-            prev = view
+            prev = view            
         }
         
         if let prev = prev {
@@ -180,5 +185,9 @@ class HourListViewCell: BaseTableViewCell {
     override func configureLayout() {
         super.configureLayout()
         self.listView.easy.layout(Edges())
+    }
+    
+    func configure(model: [HourStatModel]) {
+        self.listView.configure(models: model)
     }
 }

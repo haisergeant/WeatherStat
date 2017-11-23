@@ -43,6 +43,7 @@
 		A656F4381FC21A5C007358C1 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A656F4311FC21A5C007358C1 /* MBProgressHUD.framework */; };
 		A656F4391FC21A5C007358C1 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A656F4321FC21A5C007358C1 /* Result.framework */; };
 		A69556121FC5F0880069C44D /* TitleSubtitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69556111FC5F0880069C44D /* TitleSubtitleView.swift */; };
+		E8FDA9B61FC671780062E774 /* DayStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FDA9B51FC671780062E774 /* DayStatView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		A656F4311FC21A5C007358C1 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Carthage/Build/iOS/MBProgressHUD.framework; sourceTree = "<group>"; };
 		A656F4321FC21A5C007358C1 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		A69556111FC5F0880069C44D /* TitleSubtitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubtitleView.swift; sourceTree = "<group>"; };
+		E8FDA9B51FC671780062E774 /* DayStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStatView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +221,7 @@
 				A644F37B1FC5FA4C00DC6D23 /* BaseTableViewCell.swift */,
 				A69556111FC5F0880069C44D /* TitleSubtitleView.swift */,
 				A611813E1FC5E58000677692 /* HourStatView.swift */,
+				E8FDA9B51FC671780062E774 /* DayStatView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				A656F3D71FC20BE1007358C1 /* Sources */,
 				A656F3D81FC20BE1007358C1 /* Frameworks */,
 				A656F3D91FC20BE1007358C1 /* Resources */,
+				E8FDA9B71FC698520062E774 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -383,6 +387,36 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E8FDA9B71FC698520062E774 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/EasyPeasy.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/BonMot.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Result.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReactiveSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReactiveCocoa.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/EasyPeasy.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BonMot.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MBProgressHUD.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A656F3D71FC20BE1007358C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -407,6 +441,7 @@
 				A656F41E1FC20FC2007358C1 /* BaseView.swift in Sources */,
 				A656F4231FC20FC2007358C1 /* ServerRepository.swift in Sources */,
 				A656F4201FC20FC2007358C1 /* BaseViewController.swift in Sources */,
+				E8FDA9B61FC671780062E774 /* DayStatView.swift in Sources */,
 				A611812E1FC5CDEE00677692 /* WeatherStatus.swift in Sources */,
 				A611813B1FC5DFCE00677692 /* WeatherRouter.swift in Sources */,
 			);
@@ -559,6 +594,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = WeatherStat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.haile.WeatherStat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -577,6 +613,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = WeatherStat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.haile.WeatherStat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
