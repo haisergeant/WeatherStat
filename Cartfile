@@ -3,3 +3,5 @@ github "nakiostudio/EasyPeasy" ~> 1.6
 github "ReactiveCocoa/ReactiveCocoa" ~> 6.0
 github "Raizlabs/BonMot"
 github "jdg/MBProgressHUD" ~> 1.1.0
+github "Quick/Quick" == 1.1.0
+github "Quick/Nimble" == 7.0.1
