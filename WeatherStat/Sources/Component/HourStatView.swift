@@ -126,17 +126,25 @@ class HourListView: BaseView {
     let scrollView = UIScrollView()
     let container = UIView()
     
+    let topSeparator = UIView()
+    let bottomSeparator = UIView()
+    
     override func configureSubviews() {
         super.configureSubviews()
         self.addSubview(self.scrollView)
         self.scrollView.addSubview(self.container)
-        self.backgroundColor = .white
+        
+        self.addSubview(self.topSeparator)
+        self.addSubview(self.bottomSeparator)
     }
     
     override func configureLayout() {
         super.configureLayout()
         self.scrollView.easy.layout(
-            Edges(),
+            Top(),
+            Bottom(),
+            Left(20),
+            Right(20),
             Height().like(self.container)
         )
         
@@ -144,9 +152,33 @@ class HourListView: BaseView {
             Top(),
             Bottom(),
             Left(),
-            Right(),
-            Height(80.0)
+            Right()
         )
+        
+        self.topSeparator.easy.layout(
+            Top(),
+            Left(),
+            Right(),
+            Height(1)
+        )
+        
+        self.bottomSeparator.easy.layout(
+            Bottom(),
+            Left(),
+            Right(),
+            Height(1)
+        )
+    }
+    
+    override func configureStyle() {
+        super.configureStyle()
+        self.topSeparator.backgroundColor = AppStyle.instance.colorPaleGray()
+        self.bottomSeparator.backgroundColor = AppStyle.instance.colorPaleGray()
+        
+        self.backgroundColor = .white
+        self.scrollView.clipsToBounds = false
+        self.scrollView.showsHorizontalScrollIndicator = false
+        self.scrollView.showsVerticalScrollIndicator = false
     }
     
     func configure(model: HourListModel) {

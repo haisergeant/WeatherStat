@@ -91,11 +91,11 @@ class AppStyle {
     
     // Size
     func sizeImageLarge() -> CGSize {
-        return CGSize(square: 20)
+        return CGSize(square: 30)
     }
     
     func sizeImageSmall() -> CGSize {
-        return CGSize(square: 10)
+        return CGSize(square: 20)
     }
     
     // Padding
@@ -138,6 +138,6 @@ class AppStyle {
     }
     
     func colorLightBlue() -> UIColor {
-        return UIColor(red: 231.0/255.0, green: 160.0/255.0, blue: 68.0/255.0, alpha: 1.0)
+        return UIColor(red: 134.0/255.0, green: 184.0/255.0, blue: 240.0/255.0, alpha: 1.0)
     }
 }

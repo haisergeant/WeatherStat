@@ -103,9 +103,8 @@ class DayStatView: BaseView {
         
         self.imageView.easy.layout(
             Top(self.padding.appPadding.top),
-            Right(self.padding.horizontalSpacing).to(self.labelHighTemp, .left),
-            Bottom(<=self.padding.appPadding.bottom),
-            Width(40.0)
+            Right(self.padding.horizontalSpacing * 3).to(self.labelHighTemp, .left),
+            Bottom(<=self.padding.appPadding.bottom)
         )
         
         self.labelTitle.easy.layout(
