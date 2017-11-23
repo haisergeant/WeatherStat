@@ -107,6 +107,7 @@ class HourStatView: BaseView {
         self.labelTitle.attributedText = model.title.styled(with: model.style.titleStyle)
         self.labelSubtitle.attributedText = model.subtitle.styled(with: model.style.subtitleStyle)
         self.imageView.image = model.image?.brush(withColor: model.style.imageColor)
+        self.imageView.contentMode = .scaleAspectFit
         
         self.imageView.easy.layout(Size(model.style.imageSize))
         self.padding = model.padding
