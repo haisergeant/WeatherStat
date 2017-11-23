@@ -26,7 +26,7 @@ class DayStatModel {
         init(titleStyle: StringStyle = StringStyle(.font(AppStyle.instance.fontBodyCopySmallRegular()),
                                                    .color(AppStyle.instance.colorDarkGray())),
              imageSize: CGSize = AppStyle.instance.sizeImageSmall(),
-             imageColor: UIColor = AppStyle.instance.colorLightBlue(),
+             imageColor: UIColor = AppStyle.instance.colorPurple(),
              tempHighStyle: StringStyle = StringStyle(.font(AppStyle.instance.fontBodyCopyRegular()),
                                                       .color(AppStyle.instance.colorDarkGray()),
                                                       .alignment(.center)),

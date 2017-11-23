@@ -25,7 +25,7 @@ class HourStatModel {
                                                    .color(AppStyle.instance.colorDarkGray()),
                                                    .alignment(.center)),
              imageSize: CGSize = AppStyle.instance.sizeImageSmall(),
-             imageColor: UIColor = AppStyle.instance.colorLightBlue(),
+             imageColor: UIColor = AppStyle.instance.colorPurple(),
              subtitleStyle: StringStyle = StringStyle(.font(AppStyle.instance.fontBodyCopyRegular()),
                                                       .color(AppStyle.instance.colorDarkGray()),
                                                       .alignment(.center))) {
